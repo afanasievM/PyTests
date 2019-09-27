@@ -119,6 +119,7 @@ def main():
 
     print('Starting Up Serial Monitor')
     if po.__len__() == 0:
+        print("No ports")
         return
     N_port = input("Choose port\n")
     if N_port == 'ex':
