@@ -118,10 +118,17 @@ def main():
         po.append(p.device)
 
     print('Starting Up Serial Monitor')
-
+    if po.__len__() == 0:
+        return
+    N_port = input("Choose port\n")
+    if N_port == 'ex':
+        print("End")
+        return
+    else:
+        N_port = int(N_port)
     try:
         p = serial.Serial(
-            port = str(po[int(input("Choose port\n"))]),
+            port = str(po[N_port]),
             baudrate = 115200
             #parity = serial.PARITY_NONE,
             #stopbits = serial.STOPBITS_ONE,
