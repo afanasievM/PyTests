@@ -5,6 +5,7 @@ import getpass
 import re
 #from Scripts import functions
 import time
+from sys import platform
 
 
 class PhotoMaker(threading.Thread):
@@ -110,6 +111,7 @@ class PrintThread(threading.Thread):
 s = ''
 
 def main():
+    print(platform)
     global p, s, log
     po = []
     ports = list(serial.tools.list_ports.comports())
