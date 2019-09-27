@@ -6,7 +6,8 @@ import re
 #from Scripts import functions
 import time
 from sys import platform
-
+from Classes import PrintThread
+from Classes import InputThread
 
 class PhotoMaker(threading.Thread):
     def run(self):
@@ -58,60 +59,10 @@ def escape_ansi(line):
     return ansi_escape.sub('', line)
 
 
-class InputThread(threading.Thread):
-    def __init__(self):
-        super(InputThread, self).__init__()
-        self._stop_event = threading.Event()
-
-    def stop(self):
-        self._stop_event.set()
-        return 1
-
-    def join(self, *args, **kwargs):
-        self.stop()
-        super(InputThread, self).join(*args, **kwargs)
-
-    def run(self):
-        global s
-        while not self._stop_event.is_set():
-            s = input()
-            if "cmd" in s:
-                command(s)
-            else:
-                p.write(bytes((s+'\n\r').encode("UTF-8")))
-        print("Input off")
-
-
-class PrintThread(threading.Thread):
-    def __init__(self):
-        super(PrintThread, self).__init__()
-        self._stop_event = threading.Event()
-
-    def stop(self):
-        self._stop_event.set()
-        return 1
-
-    def join(self, *args, **kwargs):
-        self.stop()
-        super(PrintThread, self).join(*args, **kwargs)
-
-    def run(self):
-        while not self._stop_event.is_set():
-            x = p.readline().decode("utf-8")
-            x = escape_ansi(x).replace('>\r', '>')
-            t = datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
-            print(t + " " + x, end = "")
-            if log.closed:
-                return
-            else:
-                log.write(t + " " + x)
-        print("Print off")
-
 
 s = ''
 
 def main():
-    print(platform)
     global p, s, log
     po = []
     ports = list(serial.tools.list_ports.comports())
@@ -147,12 +98,19 @@ def main():
         exit()
     if p.is_open:
         print('Opened')
-        filename = '/home/'+getpass.getuser() + '/PyLogs/'+str(datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))+'.hub.log'
+        #Linux
+        if 'linux' in platform:
+            filename = '/home/'+getpass.getuser() + '/PyLogs/'+str(datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))+'.hub.log'
+        #Windows
+        if 'win32' in platform:
+            filename= 'C:/PyLogs/'+str(datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))+'.hub.log'
         log = open(filename, 'w+', encoding = "utf-8")
         pt = PrintThread()
         it = InputThread()
-        pt.start()
-        it.start()
+        #pt.start()
+        #it.start()
+        pt.run(s,p,log)
+        it.run(s,p)
         f_stop = False
         while True:
             #print(threading.active_count())
