@@ -6,8 +6,13 @@ import re
 #from Scripts import functions
 import time
 from sys import platform
+<<<<<<< Updated upstream
 from Classes import PrintThread
 from Classes import InputThread
+=======
+import os
+
+>>>>>>> Stashed changes
 
 class PhotoMaker(threading.Thread):
     def run(self):
@@ -98,12 +103,18 @@ def main():
         exit()
     if p.is_open:
         print('Opened')
+<<<<<<< Updated upstream
         #Linux
         if 'linux' in platform:
             filename = '/home/'+getpass.getuser() + '/PyLogs/'+str(datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))+'.hub.log'
         #Windows
         if 'win32' in platform:
             filename= 'C:/PyLogs/'+str(datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))+'.hub.log'
+=======
+        if not os.path.isdir('./PyLogs'):
+            os.makedirs('./PyLogs')
+        filename ='./PyLogs/'+str(datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))+'.hub.log'
+>>>>>>> Stashed changes
         log = open(filename, 'w+', encoding = "utf-8")
         pt = PrintThread()
         it = InputThread()
