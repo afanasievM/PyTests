@@ -1,6 +1,7 @@
 <application>
   <component name="FileTypeManager" version="17">
     <extensionMap>
+      <mapping pattern="Test_1.py" type="PLAIN_TEXT" />
       <mapping pattern="mc_rssi_noise" type="PLAIN_TEXT" />
     </extensionMap>
   </component>
