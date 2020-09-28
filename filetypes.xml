@@ -1,9 +1,10 @@
 <application>
   <component name="FileTypeManager" version="17">
     <extensionMap>
+      <mapping pattern="00083D6F_2020-09-27 12:00_2020-09-28 12:00" type="PLAIN_TEXT" />
       <mapping pattern="8ce9f_GSM" type="PLAIN_TEXT" />
-      <mapping pattern="Untitled Document" type="PLAIN_TEXT" />
       <mapping pattern="mc_rssi_noise" type="PLAIN_TEXT" />
+      <mapping pattern="Untitled Document" type="PLAIN_TEXT" />
       <mapping pattern="Test_1.py" type="PLAIN_TEXT" />
       <mapping ext="file" type="PLAIN_TEXT" />
       <mapping ext="bin" type="PLAIN_TEXT" />
