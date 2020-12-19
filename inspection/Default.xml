@@ -18,4 +18,11 @@
       </list>
     </option>
   </inspection_tool>
+  <inspection_tool class="PyStubPackagesCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
+    <option name="ignoredStubPackages">
+      <list>
+        <option value="google-api-python-client-stubs" />
+      </list>
+    </option>
+  </inspection_tool>
 </profile>
